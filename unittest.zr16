@@ -1,0 +1,562 @@
+; JMP
+JMP 0x000
+jmp 0x00f
+jmp 0x0ff
+jmp 0x3ff
+jmp p0 r0
+jmp p1 r1
+jmp p2 r2
+jmp p3 r3
+jmp p0 (r0)
+jmp p1 (r1)
+jmp p2 (r2)
+jmp p3 (r3)
+
+; Jcc
+JZ 0x000
+jz 0x00f
+jz 0x0ff
+jz 0x3ff
+JNZ 0x000
+jnz 0x00f
+jnz 0x0ff
+jnz 0x3ff
+JC 0x000
+jc 0x00f
+jc 0x0ff
+jc 0x3ff
+JVP 0x000
+jvp 0x00f
+jvp 0x0ff
+jvp 0x3ff
+
+; CALL
+CALL 0x000
+call 0x00f
+call 0x0ff
+call 0x3ff
+call p0 r0
+call p1 r1
+call p2 r2
+call p3 r3
+call p0 (r0)
+call p1 (r1)
+call p2 (r2)
+call p3 (r3)
+
+; RETc
+RET
+ret
+RETC
+retc
+RETS
+rets
+RETZ
+retz
+
+; MVS
+MVS r0, 0x7F
+mvs r1, 0x7F
+mvs r2, 0x7F
+mvs r3, 0x7F
+
+; AND
+AND r0, r0
+and r0, r1
+and r1, r0
+and r1, r2
+and r0, 0x12
+and r0, 0x34
+and r0, 0x56
+and r0, 0x78
+and r0, (r0)
+and r0, (r1)
+and r1, (r0)
+and r1, (r2)
+and (r0), (r0)
+and (r0), (r1)
+and (r1), (r0)
+and (r1), (r2)
+and (r0), 0x12
+and (r0), 0x34
+and (r0), 0x56
+and (r0), 0x78
+and (0x12), r0
+and (0x34), r0
+and (0x56), r0
+and (0x78), r0
+and (0x12), (r0)
+and (0x34), (r0)
+and (0x56), (r0)
+and (0x78), (r0)
+and io (0x12), r0
+and io (0x34), r0
+and io (0x56), r0
+and io (0x78), r0
+and io r0, (0x12)
+and io r0, (0x34)
+and io r0, (0x56)
+and io r0, (0x78)
+and io (r0), r0
+and io (r0), r1
+and io (r1), r0
+and io (r1), r2
+and io r0, (r0)
+and io r0, (r1)
+and io r1, (r0)
+and io r1, (r2)
+
+; OR
+OR r0, r0
+or r0, r1
+or r1, r0
+or r1, r2
+or r0, 0x12
+or r0, 0x34
+or r0, 0x56
+or r0, 0x78
+or r0, (r0)
+or r0, (r1)
+or r1, (r0)
+or r1, (r2)
+or (r0), (r0)
+or (r0), (r1)
+or (r1), (r0)
+or (r1), (r2)
+or (r0), 0x12
+or (r0), 0x34
+or (r0), 0x56
+or (r0), 0x78
+or (0x12), r0
+or (0x34), r0
+or (0x56), r0
+or (0x78), r0
+or (0x12), (r0)
+or (0x34), (r0)
+or (0x56), (r0)
+or (0x78), (r0)
+or io (0x12), r0
+or io (0x34), r0
+or io (0x56), r0
+or io (0x78), r0
+or io r0, (0x12)
+or io r0, (0x34)
+or io r0, (0x56)
+or io r0, (0x78)
+or io (r0), r0
+or io (r0), r1
+or io (r1), r0
+or io (r1), r2
+or io r0, (r0)
+or io r0, (r1)
+or io r1, (r0)
+or io r1, (r2)
+
+; XOR
+XOR r0, r0
+xor r0, r1
+xor r1, r0
+xor r1, r2
+xor r0, 0x12
+xor r0, 0x34
+xor r0, 0x56
+xor r0, 0x78
+xor r0, (r0)
+xor r0, (r1)
+xor r1, (r0)
+xor r1, (r2)
+xor (r0), (r0)
+xor (r0), (r1)
+xor (r1), (r0)
+xor (r1), (r2)
+xor (r0), 0x12
+xor (r0), 0x34
+xor (r0), 0x56
+xor (r0), 0x78
+xor (0x12), r0
+xor (0x34), r0
+xor (0x56), r0
+xor (0x78), r0
+xor (0x12), (r0)
+xor (0x34), (r0)
+xor (0x56), (r0)
+xor (0x78), (r0)
+xor io (0x12), r0
+xor io (0x34), r0
+xor io (0x56), r0
+xor io (0x78), r0
+xor io r0, (0x12)
+xor io r0, (0x34)
+xor io r0, (0x56)
+xor io r0, (0x78)
+xor io (r0), r0
+xor io (r0), r1
+xor io (r1), r0
+xor io (r1), r2
+xor io r0, (r0)
+xor io r0, (r1)
+xor io r1, (r0)
+xor io r1, (r2)
+
+; CMP
+CMP r0, r0
+cmp r0, r1
+cmp r1, r0
+cmp r1, r2
+cmp r0, 0x12
+cmp r0, 0x34
+cmp r0, 0x56
+cmp r0, 0x78
+cmp r0, (r0)
+cmp r0, (r1)
+cmp r1, (r0)
+cmp r1, (r2)
+cmp (r0), (r0)
+cmp (r0), (r1)
+cmp (r1), (r0)
+cmp (r1), (r2)
+cmp (r0), 0x12
+cmp (r0), 0x34
+cmp (r0), 0x56
+cmp (r0), 0x78
+cmp (0x12), r0
+cmp (0x34), r0
+cmp (0x56), r0
+cmp (0x78), r0
+cmp (0x12), (r0)
+cmp (0x34), (r0)
+cmp (0x56), (r0)
+cmp (0x78), (r0)
+cmp io (0x12), r0
+cmp io (0x34), r0
+cmp io (0x56), r0
+cmp io (0x78), r0
+cmp io r0, (0x12)
+cmp io r0, (0x34)
+cmp io r0, (0x56)
+cmp io r0, (0x78)
+cmp io (r0), r0
+cmp io (r0), r1
+cmp io (r1), r0
+cmp io (r1), r2
+cmp io r0, (r0)
+cmp io r0, (r1)
+cmp io r1, (r0)
+cmp io r1, (r2)
+
+; ADD
+ADD r0, r0
+add r0, r1
+add r1, r0
+add r1, r2
+add r0, 0x12
+add r0, 0x34
+add r0, 0x56
+add r0, 0x78
+add r0, (r0)
+add r0, (r1)
+add r1, (r0)
+add r1, (r2)
+add (r0), (r0)
+add (r0), (r1)
+add (r1), (r0)
+add (r1), (r2)
+add (r0), 0x12
+add (r0), 0x34
+add (r0), 0x56
+add (r0), 0x78
+add (0x12), r0
+add (0x34), r0
+add (0x56), r0
+add (0x78), r0
+add (0x12), (r0)
+add (0x34), (r0)
+add (0x56), (r0)
+add (0x78), (r0)
+add io (0x12), r0
+add io (0x34), r0
+add io (0x56), r0
+add io (0x78), r0
+add io r0, (0x12)
+add io r0, (0x34)
+add io r0, (0x56)
+add io r0, (0x78)
+add io (r0), r0
+add io (r0), r1
+add io (r1), r0
+add io (r1), r2
+add io r0, (r0)
+add io r0, (r1)
+add io r1, (r0)
+add io r1, (r2)
+
+; SUB
+SUB r0, r0
+sub r0, r1
+sub r1, r0
+sub r1, r2
+sub r0, 0x12
+sub r0, 0x34
+sub r0, 0x56
+sub r0, 0x78
+sub r0, (r0)
+sub r0, (r1)
+sub r1, (r0)
+sub r1, (r2)
+sub (r0), (r0)
+sub (r0), (r1)
+sub (r1), (r0)
+sub (r1), (r2)
+sub (r0), 0x12
+sub (r0), 0x34
+sub (r0), 0x56
+sub (r0), 0x78
+sub (0x12), r0
+sub (0x34), r0
+sub (0x56), r0
+sub (0x78), r0
+sub (0x12), (r0)
+sub (0x34), (r0)
+sub (0x56), (r0)
+sub (0x78), (r0)
+sub io (0x12), r0
+sub io (0x34), r0
+sub io (0x56), r0
+sub io (0x78), r0
+sub io r0, (0x12)
+sub io r0, (0x34)
+sub io r0, (0x56)
+sub io r0, (0x78)
+sub io (r0), r0
+sub io (r0), r1
+sub io (r1), r0
+sub io (r1), r2
+sub io r0, (r0)
+sub io r0, (r1)
+sub io r1, (r0)
+sub io r1, (r2)
+
+; ROT
+ROT r0, r0
+rot r0, r1
+rot r1, r0
+rot r1, r2
+rot r0, (r0)
+rot r0, (r1)
+rot r1, (r0)
+rot r1, (r2)
+rot (r0), (r0)
+rot (r0), (r1)
+rot (r1), (r0)
+rot (r1), (r2)
+rot (0x12), r0
+rot (0x34), r0
+rot (0x56), r0
+rot (0x78), r0
+rot (0x12), (r0)
+rot (0x34), (r0)
+rot (0x56), (r0)
+rot (0x78), (r0)
+rot io (0x12), r0
+rot io (0x34), r0
+rot io (0x56), r0
+rot io (0x78), r0
+rot io r0, (0x12)
+rot io r0, (0x34)
+rot io r0, (0x56)
+rot io r0, (0x78)
+rot io (r0), r0
+rot io (r0), r1
+rot io (r1), r0
+rot io (r1), r2
+rot io r0, (r0)
+rot io r0, (r1)
+rot io r1, (r0)
+rot io r1, (r2)
+
+; SHL
+SHL r0, r0
+shl r0, r1
+shl r1, r0
+shl r1, r2
+shl r0, (r0)
+shl r0, (r1)
+shl r1, (r0)
+shl r1, (r2)
+shl (r0), (r0)
+shl (r0), (r1)
+shl (r1), (r0)
+shl (r1), (r2)
+shl (0x12), r0
+shl (0x34), r0
+shl (0x56), r0
+shl (0x78), r0
+shl (0x12), (r0)
+shl (0x34), (r0)
+shl (0x56), (r0)
+shl (0x78), (r0)
+shl io (0x12), r0
+shl io (0x34), r0
+shl io (0x56), r0
+shl io (0x78), r0
+shl io r0, (0x12)
+shl io r0, (0x34)
+shl io r0, (0x56)
+shl io r0, (0x78)
+shl io (r0), r0
+shl io (r0), r1
+shl io (r1), r0
+shl io (r1), r2
+shl io r0, (r0)
+shl io r0, (r1)
+shl io r1, (r0)
+shl io r1, (r2)
+
+; SHA
+SHA r0, r0
+sha r0, r1
+sha r1, r0
+sha r1, r2
+sha r0, (r0)
+sha r0, (r1)
+sha r1, (r0)
+sha r1, (r2)
+sha (r0), (r0)
+sha (r0), (r1)
+sha (r1), (r0)
+sha (r1), (r2)
+sha (0x12), r0
+sha (0x34), r0
+sha (0x56), r0
+sha (0x78), r0
+sha (0x12), (r0)
+sha (0x34), (r0)
+sha (0x56), (r0)
+sha (0x78), (r0)
+sha io (0x12), r0
+sha io (0x34), r0
+sha io (0x56), r0
+sha io (0x78), r0
+sha io r0, (0x12)
+sha io r0, (0x34)
+sha io r0, (0x56)
+sha io r0, (0x78)
+sha io (r0), r0
+sha io (r0), r1
+sha io (r1), r0
+sha io (r1), r2
+sha io r0, (r0)
+sha io r0, (r1)
+sha io r1, (r0)
+sha io r1, (r2)
+
+; MOV
+MOV r0, r0
+mov r0, r1
+mov r1, r0
+mov r1, r2
+mov r0, 0x12
+mov r0, 0x34
+mov r0, 0x56
+mov r0, 0x78
+mov r0, (r0)
+mov r0, (r1)
+mov r1, (r0)
+mov r1, (r2)
+mov (r0), (r0)
+mov (r0), (r1)
+mov (r1), (r0)
+mov (r1), (r2)
+mov (r0), 0x12
+mov (r0), 0x34
+mov (r0), 0x56
+mov (r0), 0x78
+mov (0x12), r0
+mov (0x34), r0
+mov (0x56), r0
+mov (0x78), r0
+mov (0x12), (r0)
+mov (0x34), (r0)
+mov (0x56), (r0)
+mov (0x78), (r0)
+mov io (0x12), r0
+mov io (0x34), r0
+mov io (0x56), r0
+mov io (0x78), r0
+mov io r0, (0x12)
+mov io r0, (0x34)
+mov io r0, (0x56)
+mov io r0, (0x78)
+mov io (r0), r0
+mov io (r0), r1
+mov io (r1), r0
+mov io (r1), r2
+mov io r0, (r0)
+mov io r0, (r1)
+mov io r1, (r0)
+mov io r1, (r2)
+
+; DJNZ
+DJNZ r1, 0x000
+djnz r1, 0x00f
+djnz r1, 0x0ff
+djnz r1, 0x3ff
+djnz r2, 0x000
+djnz r2, 0x00f
+djnz r2, 0x0ff
+djnz r2, 0x3ff
+djnz r3, 0x000
+djnz r3, 0x00f
+djnz r3, 0x0ff
+djnz r3, 0x3ff
+djnz r4, 0x000
+djnz r4, 0x00f
+djnz r4, 0x0ff
+djnz r4, 0x3ff
+
+; INC
+INC r0
+inc r1
+inc r2
+inc r3
+inc (r0)
+inc (r1)
+inc (r2)
+inc (r3)
+inc (0x12)
+inc (0x34)
+inc (0x56)
+inc (0x78)
+inc io (0x12)
+inc io (0x34)
+inc io (0x56)
+inc io (0x78)
+inc io (r0)
+inc io (r1)
+inc io (r2)
+inc io (r3)
+
+; DEC
+DEC r0
+dec r1
+dec r2
+dec r3
+dec (r0)
+dec (r1)
+dec (r2)
+dec (r3)
+dec (0x12)
+dec (0x34)
+dec (0x56)
+dec (0x78)
+dec io (0x12)
+dec io (0x34)
+dec io (0x56)
+dec io (0x78)
+dec io (r0)
+dec io (r1)
+dec io (r2)
+dec io (r3)
+
+org 0x3ff
+dw 0xFFFF

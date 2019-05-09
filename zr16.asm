@@ -174,12 +174,16 @@ macro define_mov name, opcode
 					instr opcode shl 12 + 12 shl 8 + dest_
 				else if 1 metadataof dest__ relativeto zr16.reg & 0 scaleof dest__ = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
 					instr opcode shl 12 + 14 shl 8 + 0 scaleof 1 metadataof dest__ shl 4 + 0 scaleof 1 metadataof src
+				else
+					err 'argumento inválido'
 				end if
 			else match (src__), src
 				if dest_ relativeto r0 & 0 scaleof dest_ = 0 & src__ relativeto 0
 					instr opcode shl 12 + 13 shl 8 + src__
 				else if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src__ relativeto zr16.reg & 0 scaleof src__ = 0
 					instr opcode shl 12 + 15 shl 8 + 0 scaleof 1 metadataof dest_ shl 4 + 0 scaleof 1 metadataof src__
+				else
+					err 'argumento inválido'
 				end if
 			else
 				err 'argumento inválido'
@@ -249,12 +253,16 @@ macro define_shift name, opcode
 					instr opcode shl 12 + 12 shl 8 + dest_
 				else if 1 metadataof dest__ relativeto zr16.reg & 0 scaleof dest__ = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
 					instr opcode shl 12 + 14 shl 8 + 0 scaleof 1 metadataof dest__ shl 4 + 0 scaleof 1 metadataof src
+				else
+					err 'argumento inválido'
 				end if
 			else match (src__), src
 				if dest_ relativeto r0 & 0 scaleof dest_ = 0 & src__ relativeto 0
 					instr opcode shl 12 + 13 shl 8 + src__
 				else if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src__ relativeto zr16.reg & 0 scaleof src__ = 0
 					instr opcode shl 12 + 15 shl 8 + 0 scaleof 1 metadataof dest_ shl 4 + 0 scaleof 1 metadataof src__
+				else
+					err 'argumento inválido'
 				end if
 			else
 				err 'argumento inválido'

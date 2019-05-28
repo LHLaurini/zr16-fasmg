@@ -41,9 +41,9 @@ element io?
 ; yyy = mov, add, sub, cmp, and, or, xor
 ; xxx reg1, reg2 -> xxxx|0000|reg1|reg2
 ; xxx reg1, (reg2) -> xxxx|0001|reg1|reg2
-; xxx (reg1), reg2 -> xxxx|0010|reg1|reg2
+; xxx (reg1), reg2 -> xxxx|0100|reg1|reg2
 ; yyy r0, imediato -> yyyy|0011|imediato
-; xxx r0, (endereco) -> xxxx|0100|endereco
+; xxx r0, (endereco) -> xxxx|0010|endereco
 ; xxx (reg1), (reg2) -> xxxx|0101|reg1|reg2
 ; xxx (r0), (endereco) -> xxxx|0110|endereco
 ; yyy (r0), imediato -> yyyy|0111|imediato
@@ -205,13 +205,13 @@ macro define_mov name, opcode
 				instr opcode shl 12 + 1 shl 8 + (0 scaleof (1 metadataof dest)) shl 4 + 0 scaleof (1 metadataof src_)
 			else if dest relativeto r0 & 0 scaleof dest = 0 & src_ relativeto 0
 				assert src_ >= 0 & src_ <= 0xff
-				instr opcode shl 12 + 4 shl 8 + src_
+				instr opcode shl 12 + 2 shl 8 + src_
 			else
 				err 'argumento inválido'
 			end if
 		else match [dest_], dest
 			if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
-				instr opcode shl 12 + 2 shl 8 + (0 scaleof (1 metadataof dest_)) shl 4 + 0 scaleof (1 metadataof src)
+				instr opcode shl 12 + 4 shl 8 + (0 scaleof (1 metadataof dest_)) shl 4 + 0 scaleof (1 metadataof src)
 			else if dest_ relativeto r0 & 0 scaleof dest_ = 0 & 1 metadataof src relativeto 0
 				assert src >= 0 & src <= 0xff
 				instr opcode shl 12 + 7 shl 8 + src
@@ -284,13 +284,13 @@ macro define_shift name, opcode
 				instr opcode shl 12 + 1 shl 8 + (0 scaleof (1 metadataof dest)) shl 4 + 0 scaleof (1 metadataof src_)
 			else if dest relativeto r0 & 0 scaleof dest = 0 & src_ relativeto 0
 				assert src_ >= 0 & src_ <= 0xff
-				instr opcode shl 12 + 4 shl 8 + src_
+				instr opcode shl 12 + 2 shl 8 + src_
 			else
 				err 'argumento inválido'
 			end if
 		else match [dest_], dest
 			if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
-				instr opcode shl 12 + 2 shl 8 + (0 scaleof (1 metadataof dest_)) shl 4 + 0 scaleof (1 metadataof src)
+				instr opcode shl 12 + 4 shl 8 + (0 scaleof (1 metadataof dest_)) shl 4 + 0 scaleof (1 metadataof src)
 			else if 1 metadataof dest_ relativeto 0 & src relativeto r0 & 0 scaleof src = 0
 				assert dest_ >= 0 & dest_ <= 0xff
 				instr opcode shl 12 + 8 shl 8 + dest_

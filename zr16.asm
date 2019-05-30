@@ -98,20 +98,20 @@ end macro
 macro define_jmp name, opcode
 	macro name? target
 		match p [register], target
-			if 1 metadataof p relativeto zr16.part & 0 scaleof p = 0 & 1 metadataof register relativeto zr16.reg & 0 scaleof register = 0
-				instr opcode shl 12 + 1 shl 10 + (0 scaleof (1 metadataof p)) shl 8 + (0 scaleof (1 metadataof register)) shl 4
+			if 1 metadataof (p) relativeto zr16.part & 0 scaleof (p) = 0 & 1 metadataof (register) relativeto zr16.reg & 0 scaleof (register) = 0
+				instr opcode shl 12 + 1 shl 10 + (0 scaleof (1 metadataof p)) shl 8 + (0 scaleof (1 metadataof (register))) shl 4
 			else
 				err 'argumento inválido'
 			end if
 		else match p register, target
-			if 1 metadataof p relativeto zr16.part & 0 scaleof p = 0 & 1 metadataof register relativeto zr16.reg & 0 scaleof register = 0
-				instr opcode shl 12 + 0 shl 10 + (0 scaleof (1 metadataof p)) shl 8 + (0 scaleof (1 metadataof register)) shl 4
+			if 1 metadataof (p) relativeto zr16.part & 0 scaleof (p) = 0 & 1 metadataof (register) relativeto zr16.reg & 0 scaleof (register) = 0
+				instr opcode shl 12 + 0 shl 10 + (0 scaleof (1 metadataof p)) shl 8 + (0 scaleof (1 metadataof (register))) shl 4
 			else
 				err 'argumento inválido'
 			end if
-		else if target relativeto 0
-			assert target >= 0 & target <= 0x3ff
-			instr opcode shl 12 + 2 shl 10 + target
+		else if (target) relativeto 0
+			assert (target) >= 0 & (target) <= 0x3ff
+			instr opcode shl 12 + 2 shl 10 + (target)
 		else
 			err 'argumento inválido'
 		end if
@@ -125,9 +125,9 @@ purge define_jcc
 
 macro define_jcc name, code
 	macro name? target
-		if target relativeto 0
-			assert target >= 0 & target <= 0x3ff
-			instr 0001b shl 12 + code shl 10 + target
+		if (target) relativeto 0
+			assert (target) >= 0 & (target) <= 0x3ff
+			instr 0001b shl 12 + code shl 10 + (target)
 		else
 			err 'argumento inválido'
 		end if
@@ -155,9 +155,9 @@ define_retc retz, 2
 purge define_retc
 
 macro mvs? target, immediate
-	if (1 metadataof target relativeto zr16.reg) & (immediate relativeto 0)
-		assert immediate >= 0 & immediate <= 0x7f
-		instr 0011b shl 12 + (0 scaleof (1 metadataof target)) shl 8 + immediate
+	if (1 metadataof (target) relativeto zr16.reg) & ((immediate) relativeto 0)
+		assert (immediate) >= 0 & (immediate) <= 0x7f
+		instr 0011b shl 12 + (0 scaleof (1 metadataof (target))) shl 8 + (immediate)
 	else
 		err 'argumento inválido'
 	end if
@@ -170,17 +170,17 @@ macro define_mov name, opcode
 			match [a] [b], dest_ src
 				err 'argumento inválido'
 			else match [dest__], dest_
-				if dest__ relativeto 0 & src relativeto r0 & 0 scaleof src = 0
+				if (dest__) relativeto 0 & (src) relativeto r0 & 0 scaleof (src) = 0
 					instr opcode shl 12 + 12 shl 8 + dest__
-				else if 1 metadataof dest__ relativeto zr16.reg & 0 scaleof dest__ = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
+				else if 1 metadataof (dest__) relativeto zr16.reg & 0 scaleof (dest__) = 0 & 1 metadataof (src) relativeto zr16.reg & 0 scaleof (src) = 0
 					instr opcode shl 12 + 14 shl 8 + 0 scaleof 1 metadataof dest__ shl 4 + 0 scaleof 1 metadataof src
 				else
 					err 'argumento inválido'
 				end if
 			else match [src__], src
-				if dest_ relativeto r0 & 0 scaleof dest_ = 0 & src__ relativeto 0
+				if (dest_) relativeto r0 & 0 scaleof (dest_) = 0 & (src__) relativeto 0
 					instr opcode shl 12 + 13 shl 8 + src__
-				else if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src__ relativeto zr16.reg & 0 scaleof src__ = 0
+				else if 1 metadataof (dest_) relativeto zr16.reg & 0 scaleof (dest_) = 0 & 1 metadataof (src__) relativeto zr16.reg & 0 scaleof (src__) = 0
 					instr opcode shl 12 + 15 shl 8 + 0 scaleof 1 metadataof dest_ shl 4 + 0 scaleof 1 metadataof src__
 				else
 					err 'argumento inválido'
@@ -189,41 +189,41 @@ macro define_mov name, opcode
 				err 'argumento inválido'
 			end match
 		else match [dest_] [src_], dest src
-			if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src_ relativeto zr16.reg & 0 scaleof src_ = 0
+			if 1 metadataof (dest_) relativeto zr16.reg & 0 scaleof (dest_) = 0 & 1 metadataof (src_) relativeto zr16.reg & 0 scaleof (src_) = 0
 				instr opcode shl 12 + 5 shl 8 + (0 scaleof (1 metadataof dest_)) shl 4 + 0 scaleof (1 metadataof src_)
-			else if dest_ relativeto r0 & 0 scaleof dest_ = 0 & src_ relativeto 0
+			else if (dest_) relativeto r0 & 0 scaleof (dest_) = 0 & (src_) relativeto 0
 				assert src_ >= 0 & src_ <= 0xff
 				instr opcode shl 12 + 6 shl 8 + src_
-			else if 1 metadataof dest_ relativeto 0 & src_ relativeto r0 & 0 scaleof src_ = 0
+			else if 1 metadataof (dest_) relativeto 0 & (src_) relativeto r0 & 0 scaleof (src_) = 0
 				assert dest_ >= 0 & dest_ <= 0xff
 				instr opcode shl 12 + 9 shl 8 + dest_
 			else
 				err 'argumento inválido'
 			end if
 		else match [src_], src
-			if 1 metadataof dest relativeto zr16.reg & 0 scaleof dest = 0 & 1 metadataof src_ relativeto zr16.reg & 0 scaleof src_ = 0
+			if 1 metadataof (dest) relativeto zr16.reg & 0 scaleof (dest) = 0 & 1 metadataof (src_) relativeto zr16.reg & 0 scaleof (src_) = 0
 				instr opcode shl 12 + 1 shl 8 + (0 scaleof (1 metadataof dest)) shl 4 + 0 scaleof (1 metadataof src_)
-			else if dest relativeto r0 & 0 scaleof dest = 0 & src_ relativeto 0
+			else if (dest) relativeto r0 & 0 scaleof (dest) = 0 & (src_) relativeto 0
 				assert src_ >= 0 & src_ <= 0xff
 				instr opcode shl 12 + 2 shl 8 + src_
 			else
 				err 'argumento inválido'
 			end if
 		else match [dest_], dest
-			if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
+			if 1 metadataof (dest_) relativeto zr16.reg & 0 scaleof (dest_) = 0 & 1 metadataof (src) relativeto zr16.reg & 0 scaleof (src) = 0
 				instr opcode shl 12 + 4 shl 8 + (0 scaleof (1 metadataof dest_)) shl 4 + 0 scaleof (1 metadataof src)
-			else if dest_ relativeto r0 & 0 scaleof dest_ = 0 & 1 metadataof src relativeto 0
+			else if (dest_) relativeto r0 & 0 scaleof (dest_) = 0 & 1 metadataof (src) relativeto 0
 				assert src >= 0 & src <= 0xff
 				instr opcode shl 12 + 7 shl 8 + src
-			else if 1 metadataof dest_ relativeto 0 & src relativeto r0 & 0 scaleof src = 0
+			else if 1 metadataof (dest_) relativeto 0 & (src) relativeto r0 & 0 scaleof (src) = 0
 				assert dest_ >= 0 & dest_ <= 0xff
 				instr opcode shl 12 + 8 shl 8 + dest_
 			else
 				err 'argumento inválido'
 			end if
-		else if 1 metadataof dest relativeto zr16.reg & 0 scaleof dest = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
+		else if 1 metadataof (dest) relativeto zr16.reg & 0 scaleof (dest) = 0 & 1 metadataof (src) relativeto zr16.reg & 0 scaleof (src) = 0
 			instr opcode shl 12 + 0 shl 8 + (0 scaleof (1 metadataof dest)) shl 4 + 0 scaleof (1 metadataof src)
-		else if dest relativeto r0 & 0 scaleof dest = 0 & src relativeto 0
+		else if (dest) relativeto r0 & 0 scaleof (dest) = 0 & (src) relativeto 0
 			assert src >= 0 & src <= 0xff
 			instr opcode shl 12 + 3 shl 8 + src
 		else
@@ -249,17 +249,17 @@ macro define_shift name, opcode
 			match [a] [b], dest_ src
 				err 'argumento inválido'
 			else match [dest__], dest_
-				if dest__ relativeto 0 & src relativeto r0 & 0 scaleof src = 0
+				if (dest__) relativeto 0 & (src) relativeto r0 & 0 scaleof (src) = 0
 					instr opcode shl 12 + 12 shl 8 + dest__
-				else if 1 metadataof dest__ relativeto zr16.reg & 0 scaleof dest__ = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
+				else if 1 metadataof (dest__) relativeto zr16.reg & 0 scaleof (dest__) = 0 & 1 metadataof (src) relativeto zr16.reg & 0 scaleof (src) = 0
 					instr opcode shl 12 + 14 shl 8 + 0 scaleof 1 metadataof dest__ shl 4 + 0 scaleof 1 metadataof src
 				else
 					err 'argumento inválido'
 				end if
 			else match [src__], src
-				if dest_ relativeto r0 & 0 scaleof dest_ = 0 & src__ relativeto 0
+				if (dest_) relativeto r0 & 0 scaleof (dest_) = 0 & (src__) relativeto 0
 					instr opcode shl 12 + 13 shl 8 + src__
-				else if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src__ relativeto zr16.reg & 0 scaleof src__ = 0
+				else if 1 metadataof (dest_) relativeto zr16.reg & 0 scaleof (dest_) = 0 & 1 metadataof (src__) relativeto zr16.reg & 0 scaleof (src__) = 0
 					instr opcode shl 12 + 15 shl 8 + 0 scaleof 1 metadataof dest_ shl 4 + 0 scaleof 1 metadataof src__
 				else
 					err 'argumento inválido'
@@ -268,36 +268,36 @@ macro define_shift name, opcode
 				err 'argumento inválido'
 			end match
 		else match [dest_] [src_], dest src
-			if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src_ relativeto zr16.reg & 0 scaleof src_ = 0
+			if 1 metadataof (dest_) relativeto zr16.reg & 0 scaleof (dest_) = 0 & 1 metadataof (src_) relativeto zr16.reg & 0 scaleof (src_) = 0
 				instr opcode shl 12 + 5 shl 8 + (0 scaleof (1 metadataof dest_)) shl 4 + 0 scaleof (1 metadataof src_)
-			else if dest_ relativeto r0 & 0 scaleof dest_ = 0 & src_ relativeto 0
+			else if (dest_) relativeto r0 & 0 scaleof (dest_) = 0 & (src_) relativeto 0
 				assert src_ >= 0 & src_ <= 0xff
 				instr opcode shl 12 + 6 shl 8 + src_
-			else if 1 metadataof dest_ relativeto 0 & src_ relativeto r0 & 0 scaleof src_ = 0
+			else if 1 metadataof (dest_) relativeto 0 & (src_) relativeto r0 & 0 scaleof (src_) = 0
 				assert dest_ >= 0 & dest_ <= 0xff
 				instr opcode shl 12 + 9 shl 8 + dest_
 			else
 				err 'argumento inválido'
 			end if
 		else match [src_], src
-			if 1 metadataof dest relativeto zr16.reg & 0 scaleof dest = 0 & 1 metadataof src_ relativeto zr16.reg & 0 scaleof src_ = 0
+			if 1 metadataof (dest) relativeto zr16.reg & 0 scaleof (dest) = 0 & 1 metadataof (src_) relativeto zr16.reg & 0 scaleof (src_) = 0
 				instr opcode shl 12 + 1 shl 8 + (0 scaleof (1 metadataof dest)) shl 4 + 0 scaleof (1 metadataof src_)
-			else if dest relativeto r0 & 0 scaleof dest = 0 & src_ relativeto 0
+			else if (dest) relativeto r0 & 0 scaleof (dest) = 0 & (src_) relativeto 0
 				assert src_ >= 0 & src_ <= 0xff
 				instr opcode shl 12 + 2 shl 8 + src_
 			else
 				err 'argumento inválido'
 			end if
 		else match [dest_], dest
-			if 1 metadataof dest_ relativeto zr16.reg & 0 scaleof dest_ = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
+			if 1 metadataof (dest_) relativeto zr16.reg & 0 scaleof (dest_) = 0 & 1 metadataof (src) relativeto zr16.reg & 0 scaleof (src) = 0
 				instr opcode shl 12 + 4 shl 8 + (0 scaleof (1 metadataof dest_)) shl 4 + 0 scaleof (1 metadataof src)
-			else if 1 metadataof dest_ relativeto 0 & src relativeto r0 & 0 scaleof src = 0
+			else if 1 metadataof (dest_) relativeto 0 & (src) relativeto r0 & 0 scaleof (src) = 0
 				assert dest_ >= 0 & dest_ <= 0xff
 				instr opcode shl 12 + 8 shl 8 + dest_
 			else
 				err 'argumento inválido'
 			end if
-		else if 1 metadataof dest relativeto zr16.reg & 0 scaleof dest = 0 & 1 metadataof src relativeto zr16.reg & 0 scaleof src = 0
+		else if 1 metadataof (dest) relativeto zr16.reg & 0 scaleof (dest) = 0 & 1 metadataof (src) relativeto zr16.reg & 0 scaleof (src) = 0
 			instr opcode shl 12 + 0 shl 8 + (0 scaleof (1 metadataof dest)) shl 4 + 0 scaleof (1 metadataof src)
 		else
 			err 'argumento inválido'
@@ -312,7 +312,7 @@ define_shift sha, 1100b
 purge define_shift
 
 macro djnz? reg, target
-	if (reg relativeto r1 | reg relativeto r2 | reg relativeto r3 | reg relativeto r4) & 0 scaleof reg = 0 & target relativeto 0
+	if ((reg) relativeto r1 | (reg) relativeto r2 | (reg) relativeto r3 | (reg) relativeto r4) & 0 scaleof (reg) = 0 & (target) relativeto 0
 		assert target >= 0 & target <= 0x3ff
 		instr 1110b shl 12 + (0 scaleof (1 metadataof reg) - 1) shl 10 + target
 	else
@@ -324,24 +324,24 @@ end macro
 macro define_inc name, bit8
 	macro name? op
 		match =io? [op_], op
-			if op_ relativeto 0
+			if (op_) relativeto 0
 				assert op_ >= 0 & op_ <= 0xff
 				instr 1111b shl 12 + 6 shl 9 + bit8 shl 8 + op_
-			else if 1 metadataof op_ relativeto zr16.reg & 0 scaleof op_ = 0
+			else if 1 metadataof (op_) relativeto zr16.reg & 0 scaleof (op_) = 0
 				instr 1111b shl 12 + 7 shl 9 + bit8 shl 8 + (0 scaleof (1 metadataof op_)) shl 4
 			else
 				err 'argumento inválido'
 			end if
 		else match [op_], op
-			if 1 metadataof op_ relativeto zr16.reg & 0 scaleof op_ = 0
+			if 1 metadataof (op_) relativeto zr16.reg & 0 scaleof (op_) = 0
 				instr 1111b shl 12 + 2 shl 9 + bit8 shl 8 + (0 scaleof (1 metadataof op_)) shl 4
-			else if op_ relativeto 0
+			else if (op_) relativeto 0
 				assert op_ >= 0 & op_ <= 0xff
 				instr 1111b shl 12 + 4 shl 9 + bit8 shl 8 + op_
 			else
 				err 'argumento inválido'
 			end if
-		else if 1 metadataof op relativeto zr16.reg & 0 scaleof op = 0
+		else if 1 metadataof (op) relativeto zr16.reg & 0 scaleof (op) = 0
 			instr 1111b shl 12 + 0 shl 9 + bit8 shl 8 + (0 scaleof (1 metadataof op)) shl 4
 		else
 			err 'argumento inválido'

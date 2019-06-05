@@ -1,3 +1,10 @@
+
+; Teste de dw e org
+dw 0x1234
+sub r1, r2
+dw 0x5678
+org 0x10
+
 ; JMP
 JMP 0x000
 jmp 0x00f

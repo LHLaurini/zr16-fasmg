@@ -62,15 +62,17 @@ element _special
 ; zzz io (endereco) -> 1111|110z|endereco
 ; zzz io (regi) -> 1111|111z|regi|0000
 
-; TODO: Teste para dados
+; TODO: Dados provalmente não aparecem corretamente no arquivo MNE. Consertar isso.
 
 struc db? value&
 	local data, end_
 	data db value
 	end_:
 
-	if (end_-data) mod 2 = 1
-		err 'db deve definir uma quantidade de dados par'
+	if ~ defined mne
+		if (end_-data) mod 2 = 1
+			err 'db deve definir uma quantidade de dados par'
+		end if
 	end if
 		
 	org data + (end_-data)/2, _special

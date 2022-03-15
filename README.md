@@ -101,5 +101,5 @@ o erro resultante será
     macro uma_macro [1] macro mov [42]
     Custom error: argumento inválido.
 
-ou seja, sabemos que o erro "arumento inválido" está uma instrução `mov` dentro da macro `uma_macro`, mas o erro não informa qual, forçando o programador a procurar o erro em todas as instruções `mov` usadas pela macro. No exemplo, é fácil encontrar o erro, mas em uma macro grande, com dezenas (ou até centenas) de instruções, esse processo pode demorar.  
+ou seja, sabemos que o erro "argumento inválido" está uma instrução `mov` dentro da macro `uma_macro`, mas o erro não informa qual, forçando o programador a procurar o erro em todas as instruções `mov` usadas pela macro. No exemplo, é fácil encontrar o erro, mas em uma macro grande, com dezenas (ou até centenas) de instruções, esse processo pode demorar.  
 Desse modo, é recomendado usar subrotinas ao invés de macros quando esta tornar-se muito grande.
